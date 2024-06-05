@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Reports -->
+<section>
+
+<div class="container my-5">
+{% if 'search' in request.path %}
+<h1 class="title-page">Search Result</h1>
+    {%if reports %}
+<header class="border-bottom mb-4 pb-3">
+		<div class="form-inline">
+			<span class="mr-md-auto"><b>{{ report_count }}</b> reports found </span>
+		</div>
+</header><!-- sect-heading -->
+
+
+<div class="container">
+<table class="table table-striped">
+    <thead>
+      <tr class="tr">
+          <th class="th"><h4>Dashboard Name</h4></th>
+          <th ><h4>Department</h4></th>
+          <th class="th"><h4>Dashboard Description</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for report in reports %}
+  <tr class="tr">
+    <td class="td"><a class="no-decoration" href="{{ report.link_address }}">{{ report.report_name|upper }}</a></td>
+    <td>{{report.department|upper}}</td>
+  <td class="td">{{report.report_detail}}</td>
+  </tr>
+  {% endfor %}
+    </tbody>
+    </table>
+</div>
+    {% else %}
+   	<div>
+        <h4>No result found with keyword "{{ keyword }}"</h4>
+	</div>
+    {%endif%}
+    {% else %}
+<table class="table table-striped">
+    <thead>
+      <tr class="tr">
+          <th class="th"><h4>Dashboard Name</h4></th>
+          <th class="th"><h4>Dashboard Description</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+{% for department in departments %}
+<tr class="pih" ><td colspan="2"><h5>{{ department.department_name|upper }}</h5></td></tr>
+{% for report in department.report_set.all %}
+  <tr class="tr">
+    <td class="td"><a class="no-decoration" href="{{ report.link_address }}">{{ report.report_name|upper }}</a></td>
+    <td class="td">{{report.report_detail}}</td>
+  </tr>
+{% endfor %}
+    {% endfor %}
+        </tbody>
+</table>
+{% endif %}
+</div>
+</section>
+
+
+<!-- Products -->
+
+{% endblock %}
