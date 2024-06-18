@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Reports -->
+<section>
+<div class="container my-5">
+{% autoescape off %}
+  {{ plot_div }}
+{% endautoescape %}
+</div>
+</section>
+
+{% endblock %}

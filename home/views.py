@@ -6,7 +6,6 @@ from django.db.models import Q
 def home(request):
     reports = Report.objects.all()
     departments = Department.objects.all()
-
     context = {
         'home': reports,
         'departments': departments
@@ -22,6 +21,6 @@ def search(request):
     context = {
         'reports': reports,
         'report_count': report_count,
-        'keyword': keyword
+        'keyword': keyword,
     }
     return render(request, 'home.html', context)
